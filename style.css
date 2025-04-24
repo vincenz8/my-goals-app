@@ -1,0 +1,17 @@
+.task-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-list li {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.list-button {
+    margin-left: 8px;
+}
+
+.scoreInfo {
+    
+}

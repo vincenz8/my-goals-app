@@ -1,0 +1,8 @@
+# ignore netbeans project files
+nbproject/
+
+# ignore database files
+*.db
+
+# ignore test files
+testing/
