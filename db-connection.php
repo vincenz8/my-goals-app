@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
             $stmt->bindValue(':c2', $t->taskWeight, SQLITE3_INTEGER);
             $stmt->bindValue(':c3', $currentDate, SQLITE3_TEXT);
             if ($t->taskState === "idle") {
-                $stmt->bindValue(':c4', "idle", SQLITE3_TEXT);
+                $stmt->bindValue(':c4', "pending", SQLITE3_TEXT);
             } else {
                 $stmt->bindValue(':c4', "finished", SQLITE3_TEXT);
             }

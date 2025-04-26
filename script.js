@@ -9,6 +9,9 @@ const warning = document.createElement('p');
 warning.innerHTML = "The task cannot be empty!";
 warning.style.color = "red";
 
+const spanDailyScore = document.getElementById('dailyScore');
+let dailyScore = 0;
+
 let local_index = 0;
 let remote_index = 0;
 
@@ -21,6 +24,24 @@ function reindexLocalTasks() {
     input.name = `local_tasks[${local_index}][${field}]`;
     if (field === "task_state") local_index++;
   });
+}
+
+function attributePoints(points) {
+    switch (points) {
+        case 1:
+            dailyScore+=1;
+            break;
+        case 2:
+            dailyScore+=4;
+            break;
+        case 3:
+            dailyScore+=20;
+            break;
+        case 4:
+            dailyScore+=100;
+            break;
+    }
+    spanDailyScore.innerText = dailyScore;
 }
 
 function markAsDone(isClicked, item, button, property) {
@@ -85,6 +106,10 @@ function createTask(arrayName, index, taskName, taskWeight, taskState) {
     markAsDoneButton.addEventListener('click', () => {
         markAsDone(circleClicked, newTask, markAsDoneButton, inputTaskState);
     });
+    if (taskState === "finished") {
+        markAsDone(circleClicked, newTask, markAsDoneButton, inputTaskState);
+        attributePoints(taskWeight);
+    }
     
     newTask.appendChild(removeButton);
     newTask.appendChild(markAsDoneButton);

@@ -12,8 +12,8 @@ include 'page-elements/header.php';
     </head>
     <body>     
         <div id="points" class="points">
-            <h4>Points score today: <?php echo $pointsDaily; ?></h4>
-            <h4>Points score this week: <?php echo $pointsWeekly; ?></h4>
+            <h4>Points score today: <span id="dailyScore">0</span></h4>
+            <h4>Points score this week: <span id="weeklyScore"><?php echo $weeklyScore; ?></span></h4>
         </div>
         <div>
             <form method="post" id="taskForm" action="<?php echo htmlspecialchars($_SERVER['SCRIPT_NAME']) ?>">
