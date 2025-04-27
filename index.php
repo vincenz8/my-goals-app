@@ -54,4 +54,4 @@ include 'page-elements/header.php';
         </div>
     </body>
 </html>
-<?php include 'page-elements/footer.php'; ?>
+<?php include 'page-elements/footer.php';

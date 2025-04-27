@@ -130,7 +130,7 @@ function createLocalTask() {
         
     } else {
         
-        const newTask = createTask("local_tasks", local_index, taskName.value, taskWeight.value, "idle");
+        const newTask = createTask("local_tasks", local_index, taskName.value, taskWeight.value, "pending");
 
         const input1 = newTask.querySelector(`input[name="local_tasks[${local_index}][task_name]`);
         const input2 = newTask.querySelector(`input[name="local_tasks[${local_index}][task_weight]`);

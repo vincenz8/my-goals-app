@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
             $stmt->bindValue(':c1', $t->taskName, SQLITE3_TEXT);
             $stmt->bindValue(':c2', $t->taskWeight, SQLITE3_INTEGER);
             $stmt->bindValue(':c3', $currentDate, SQLITE3_TEXT);
-            if ($t->taskState === "idle") {
+            if ($t->taskState === "pending") {
                 $stmt->bindValue(':c4', "pending", SQLITE3_TEXT);
             } else {
                 $stmt->bindValue(':c4', "finished", SQLITE3_TEXT);
@@ -72,10 +72,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
 $fetchedTasks = [];
 $query = $db->query('SELECT * FROM day_tasks');
 while ($row = $query->fetchArray()) {
-    $obj = new stdClass();
-    $obj->taskName = $row['task_name'];
-    $obj->taskWeight = $row['task_weight'];
-    $row['task_state'] === "pending" ? $obj->taskState = "idle" : $obj->taskState = $row['task_state'];
-    $fetchedTasks[] = $obj;
+    if (date("Y-m-d", strtotime($row['task_date'])) !== $currentDate) {
+    $db->exec('INSERT INTO tasks (task_name, task_weight, task_date, task_state) SELECT * FROM day_tasks');
+    $db->exec('DELETE FROM day_tasks');
+    break;
+    } else {
+        $obj = new stdClass();
+        $obj->taskName = $row['task_name'];
+        $obj->taskWeight = $row['task_weight'];
+        $obj->taskDate = $row['task_date'];
+        $row['task_state'] === "pending" ? $obj->taskState = "idle" : $obj->taskState = $row['task_state'];
+        $fetchedTasks[] = $obj;
+    }
 }
-?>
