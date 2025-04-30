@@ -71,17 +71,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
 
 $fetchedTasks = [];
 $query = $db->query('SELECT * FROM day_tasks');
-while ($row = $query->fetchArray()) {
-    if (date("Y-m-d", strtotime($row['task_date'])) !== $currentDate) {
-    $db->exec('INSERT INTO tasks (task_name, task_weight, task_date, task_state) SELECT * FROM day_tasks');
+$row = $query->fetchArray();
+if ($row && date("Y-m-d", strtotime($row['task_date'])) !== $currentDate) {
+    $previousTasksDate = $row['task_date'];
+    $accumulatedPoints = 0;
+    while ($row) {
+        if ($row['task_state'] === "finished") {
+            switch ($row['task_weight']) {
+                case 1:
+                    $accumulatedPoints++;
+                    break;
+                case 2:
+                    $accumulatedPoints += 4;
+                    break;
+                case 3:
+                    $accumulatedPoints += 20;
+                    break;
+                case 4:
+                    $accumulatedPoints += 100;
+                    break;
+            }
+        } else {
+            switch ($row['task_weight']) {
+                case 2:
+                    $accumulatedPoints -= 2;
+                    break;
+                case 3:
+                    $accumulatedPoints -= 10;
+                    break;
+                case 4:
+                    $accumulatedPoints -= 50;
+                    break;
+            }
+        }
+        $row = $query->fetchArray();
+    }
+
+    $stmt = $db->prepare('INSERT INTO points (score, date) VALUES (:c1, :c2)');
+    $stmt->bindValue(':c1', $accumulatedPoints, SQLITE3_INTEGER);
+    $stmt->bindValue(':c2', $previousTasksDate, SQLITE3_TEXT);
+    $stmt->execute();
+
+    $db->exec('INSERT INTO finished_tasks (task_name, task_weight, task_date, task_state) SELECT * FROM day_tasks WHERE task_state = "finished"');
     $db->exec('DELETE FROM day_tasks');
-    break;
-    } else {
+
+} else {
+    while ($row) {
         $obj = new stdClass();
         $obj->taskName = $row['task_name'];
         $obj->taskWeight = $row['task_weight'];
         $obj->taskDate = $row['task_date'];
         $row['task_state'] === "pending" ? $obj->taskState = "idle" : $obj->taskState = $row['task_state'];
         $fetchedTasks[] = $obj;
+        $row = $query->fetchArray();
     }
 }
