@@ -1,57 +1,50 @@
 <?php
-include 'db-connection.php';
-include 'page-elements/header.php';
-?>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <script src="./script.js" defer></script>
-        <title>My Goals App</title>
-    </head>
-    <body>     
-        <div id="points" class="points">
-            <h4>Points score today: <span id="dailyScore">0</span></h4>
-            <h4>Points score this week: <span id="weeklyScore"><?php echo $weeklyScore; ?></span></h4>
-        </div>
-        <div>
-            <form method="post" id="taskForm" action="<?php echo htmlspecialchars($_SERVER['SCRIPT_NAME']) ?>">
-                <h3>To-do List</h3>
-                <div id="addTaskField" style="display: inline">
-                    <input type="text" id="taskName" placeholder="What to do?">
-                    <select id="taskWeight" name="taskWeight">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                    <button type="button" id="buttonAdd">Add Task</button>
-                </div>
-                <div id="taskList" class="task-list">
-                    <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                    <?php foreach ($fetchedTasks as $t): 
-                        if ($t->taskState === "idle") { ?>
-                            createRemoteTask("<?php echo $t->taskName; ?>", <?php echo $t->taskWeight; ?>, "<?php echo $t->taskState; ?>", "taskList");
-                    <?php } endforeach; ?>
-                    });
-                    </script>
-                </div>
-                <h3>Finished Tasks</h3>
-                <div id="finishedTasks" class="task-list">
-                    <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                    <?php foreach ($fetchedTasks as $t): 
-                        if ($t->taskState === "finished") { ?>
-                            createRemoteTask("<?php echo $t->taskName; ?>", <?php echo $t->taskWeight; ?>, "<?php echo $t->taskState; ?>", "finishedTasks");
-                    <?php } endforeach; ?>
-                    });
-                    </script>
-                </div>
-                <input type="submit" name="update" value="Update">
-            </form>
-        </div>
-    </body>
-</html>
-<?php include 'page-elements/footer.php';
+$db = new SQLite3('db-test.db');
+
+require 'model/dtasks-db.php';
+require 'model/ftasks-db.php';
+require 'model/points-db.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
+
+    if (isset($_POST['local_tasks']) && check_array_structure($_POST['local_tasks'])) {
+        $localTasks = sanitize_tasks($_POST['local_tasks']);
+        foreach ($localTasks as $task) {
+            insert_task($task);
+        }
+    }
+    
+    if (isset($_POST['remote_tasks']) && check_array_structure($_POST['remote_tasks'])) {
+        $remoteTasks = sanitize_tasks($_POST['remote_tasks']);
+        foreach ($remoteTasks as $task) {
+            modify_task($task);
+        }
+    }
+    header("Location: index.php");
+    exit();
+}
+
+$fetchedTasks = fetch_tasks();
+
+if ($fetchedTasks && date("Y-m-d", strtotime($fetchedTasks[0]['task_date'])) !== date("Y-m-d")) {
+    $accumulatedPoints = 0;
+    foreach ($fetchedTasks as $task) {
+        $accumulatedPoints += calculate_points($task);
+    }
+    insert_points($accumulatedPoints, $fetchedTasks[0]['task_date']);
+    move_finished_tasks();
+    $fetchedTasks = [];
+}
+
+$action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
+if (!$action) {
+    $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+    if (!$action) {
+        $action = 'manage-tasks'; // assigning default value if NULL or FALSE
+    }
+}
+
+switch ($action) {
+    default:
+        include 'blocks/manage-tasks.php';
+}

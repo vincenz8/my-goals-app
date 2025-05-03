@@ -1,5 +1,3 @@
-// const lettersNumbers = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-
 const toDoList = document.getElementById('taskList');
 const taskForm = document.getElementById('taskForm');
 const addTaskField = document.getElementById('addTaskField');
@@ -47,11 +45,11 @@ function attributePoints(points) {
 function markAsDone(isClicked, item, button, property) {
     if (!isClicked.state) {
         item.style.textDecoration = 'line-through';
-        button.src = './page-resources/circle_tick.svg';
+        button.src = 'resources/circle_tick.svg';
         property.value = "finished";
     } else {
         item.style.textDecoration = 'none';
-        button.src = './page-resources/empty_circle.svg';
+        button.src = 'resources/empty_circle.svg';
         property.value = "pending";
     }
     isClicked.switchState();
@@ -59,13 +57,13 @@ function markAsDone(isClicked, item, button, property) {
 
 function createButtonRemove() {
         const button = new Image();
-        button.src = './page-resources/trashcan.svg';
+        button.src = 'resources/trashcan.svg';
         button.className = 'button-remove';
         return button; }
     
 function createButtonMarkAsDone() {
         const button = new Image();
-        button.src = './page-resources/empty_circle.svg';
+        button.src = 'resources/empty_circle.svg';
         button.className = 'button-mark-done';
         return button; }
 
