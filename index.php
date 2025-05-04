@@ -1,4 +1,5 @@
 <?php
+
 $db = new SQLite3('db-test.db');
 
 require 'model/dtasks-db.php';
@@ -29,7 +30,11 @@ $fetchedTasks = fetch_tasks();
 if ($fetchedTasks && date("Y-m-d", strtotime($fetchedTasks[0]['task_date'])) !== date("Y-m-d")) {
     $accumulatedPoints = 0;
     foreach ($fetchedTasks as $task) {
-        $accumulatedPoints += calculate_points($task);
+        if ($task['task_state'] === "finished") {
+            $accumulatedPoints += calculate_points_ftasks($task);
+        } else {
+            $accumulatedPoints += calculate_points_ptasks($task);
+        }
     }
     insert_points($accumulatedPoints, $fetchedTasks[0]['task_date']);
     move_finished_tasks();

@@ -15,6 +15,25 @@ function check_array_structure($input) {
     return $result;
 }
 
+function build_sanitized_task($rawName, $rawWeight, $rawState) {
+    $taskName = strip_tags(trim($rawName));
+    $taskWeight = filter_var($rawWeight, FILTER_VALIDATE_INT, [
+        'options' => ['min_range' => 1, 'max_range' => 4]
+    ]);
+    $taskState = strtolower(strip_tags(trim($rawState)));
+    
+    if (!empty($taskName) && $taskWeight && !empty($taskState)) {
+        $sanitized_task = [
+            'task_name' => $taskName,
+            'task_weight' => $taskWeight,
+            'task_state' => $taskState
+        ];
+    } else {
+        $sanitized_task = [];
+    }
+    return $sanitized_task;
+}
+
 function sanitize_tasks($indexedInputs) {
     $taskList = [];
     $allowedKeys = ['task_name', 'task_weight', 'task_state'];
@@ -22,15 +41,11 @@ function sanitize_tasks($indexedInputs) {
     foreach ($indexedInputs as $taskInput) {
         $receivedKeys = array_keys($taskInput);
         $unexpectedKeys = array_diff($receivedKeys, $allowedKeys);
+        $missingKeys = array_diff($allowedKeys, $receivedKeys);
 
-        if (empty($unexpectedKeys)) {
-            $filters = [
-                'task_name' => FILTER_SANITIZE_STRING,
-                'task_weight' => FILTER_SANITIZE_NUMBER_INT,
-                'task_state' => FILTER_SANITIZE_STRING
-            ];
-
-            $taskList[] = filter_var_array($taskInput, $filters);
+        if (empty($unexpectedKeys) && empty($missingKeys)) {
+            $sanitized_task = build_sanitized_task($taskInput['task_name'], $taskInput['task_weight'], $taskInput['task_state']);
+            $sanitized_task ? $taskList[] = $sanitized_task : false;
         }
     }
     return $taskList;

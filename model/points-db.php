@@ -1,34 +1,36 @@
 <?php
 
-function calculate_points($task) {
+function calculate_points_ftasks($task) {
     $score = 0;
-    if ($task['task_state'] === "finished") {
-        switch ($task['task_weight']) {
-            case 1:
-                $score++;
-                break;
-            case 2:
-                $score += 4;
-                break;
-            case 3:
-                $score += 20;
-                break;
-            case 4:
-                $score += 100;
-                break;
-        }
-    } else {
-        switch ($task['task_weight']) {
-            case 2:
-                $score -= 2;
-                break;
-            case 3:
-                $score -= 10;
-                break;
-            case 4:
-                $score -= 50;
-                break;
-        }
+    switch ($task['task_weight']) {
+        case 1:
+            $score++;
+            break;
+        case 2:
+            $score += 4;
+            break;
+        case 3:
+            $score += 20;
+            break;
+        case 4:
+            $score += 100;
+            break;
+    }
+    return $score;
+}
+
+function calculate_points_ptasks($task) {
+    $score = 0;
+    switch ($task['task_weight']) {
+        case 2:
+            $score -= 2;
+            break;
+        case 3:
+            $score -= 10;
+            break;
+        case 4:
+            $score -= 50;
+            break;
     }
     return $score;
 }
