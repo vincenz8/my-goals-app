@@ -1,9 +1,4 @@
 <?php include 'header.php'; ?>
-
-<div id="points" class="points">
-    <h4>Points score today: <span id="dailyScore">0</span></h4>
-    <h4>Points score this week: <span id="weeklyScore"><?= $weeklyScore; ?></span></h4>
-</div>
 <div>
     <form action="." method="post" id="taskForm">
         <h3>To-do List</h3>

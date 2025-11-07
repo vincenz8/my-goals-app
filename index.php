@@ -27,18 +27,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update'])) {
 
 $fetchedTasks = fetch_tasks();
 
-if ($fetchedTasks && date("Y-m-d", strtotime($fetchedTasks[0]['task_date'])) !== date("Y-m-d")) {
-    $accumulatedPoints = 0;
+if ($fetchedTasks) {
+    $taskFinished = 0;
     foreach ($fetchedTasks as $task) {
-        if ($task['task_state'] === "finished") {
-            $accumulatedPoints += calculate_points_ftasks($task);
-        } else {
-            $accumulatedPoints += calculate_points_ptasks($task);
+        if ($task['task_state'] == "finished") {
+            $taskFinished++;
         }
     }
-    insert_points($accumulatedPoints, $fetchedTasks[0]['task_date']);
-    move_finished_tasks();
-    $fetchedTasks = [];
+    if ($taskFinished) {
+        $goalProgress = round(($taskFinished / count($fetchedTasks)) * 100);
+    } else {
+        $goalProgress = "0";
+    }
+    
+    if (date("Y-m-d", strtotime($fetchedTasks[0]['task_date'])) !== date("Y-m-d")) {
+        $accumulatedPoints = 0;
+        foreach ($fetchedTasks as $task) {
+            if ($task['task_state'] === "finished") {
+                $accumulatedPoints += calculate_points_ftasks($task);
+            } else {
+                $accumulatedPoints += calculate_points_ptasks($task);
+            }
+        }
+        insert_points($accumulatedPoints, $fetchedTasks[0]['task_date']);
+        move_finished_tasks();
+        $fetchedTasks = [];
+    }
 }
 
 $action = htmlspecialchars($_POST['action']);

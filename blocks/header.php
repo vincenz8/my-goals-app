@@ -11,7 +11,15 @@
     
 <body>
     <header>
-        <h2>My Goals</h2>
-        <div class="scoreInfo">Daily goals progress: %<?php echo $goalProgress; ?></div>
+        <div id="h_logo">My Goals App</div>
+        <div id="h_stats">
+            <div>Points score today: <span id="dailyScore">0</span></div>
+            <span class="separator"></span>
+            <?php if ($goalProgress || $goalProgress === "0") { ?>
+            <div>Daily goals progress: <?= $goalProgress ?>%</div>
+            <?php } else { ?>
+            <div>Daily goals progress: --</div>
+            <?php } ?>
+        </div>
     </header>
     <main>

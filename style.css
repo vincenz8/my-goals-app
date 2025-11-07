@@ -1,3 +1,52 @@
+html {
+    font-size: 14px;
+    font-family: "Gill Sans", sans-serif;
+    color: #000;
+    text-align: center;
+}
+
+header {
+    margin: auto;
+    width: 640px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#h_logo {
+    flex-grow: 1;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: lightseagreen;
+    text-align: start;
+}
+
+#h_stats {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+#h_stats > div {
+    order: 2;
+    width: 47.5%;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.2);
+}
+
+.separator {
+    order: 2;
+    padding: 2%;
+}
+
+main {
+    margin: auto;
+    width: 640px;
+}
+
 .task-list {
     display: flex;
     flex-direction: column;
@@ -12,6 +61,22 @@
     margin-left: 8px;
 }
 
-.scoreInfo {
+@media (max-width: 639px) {
+    header {
+        margin: 0;
+        width: 100%;
+    }
+    main {
+        width: 100%;
+    }
     
+    #h_stats > div {
+        width: 35%;
+    }
+    
+    .separator {
+        order: 1;
+        padding: 5%;
+    }
 }
+
