@@ -1,8 +1,11 @@
-# ignore netbeans project files
+# netbeans project files
 nbproject/
 
-# ignore database files
+# database files
 *.db
 
-# ignore test files
+# test folder
 testing/
+
+# other
+ideas_and_progress

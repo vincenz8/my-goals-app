@@ -12,11 +12,11 @@
    inkscape:export-filename="Ciruclo X.svg"
    inkscape:export-xdpi="192"
    inkscape:export-ydpi="192"
+   xml:space="preserve"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
      id="namedview100"
      pagecolor="#505050"
      bordercolor="#eeeeee"
@@ -27,40 +27,50 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="px"
      showgrid="true"
-     inkscape:zoom="33.953783"
-     inkscape:cx="4.5944807"
-     inkscape:cy="8.364311"
+     inkscape:zoom="32"
+     inkscape:cx="5.5625"
+     inkscape:cy="10.171875"
      inkscape:window-width="1920"
-     inkscape:window-height="1008"
+     inkscape:window-height="1003"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1">
-    <inkscape:grid
+     inkscape:current-layer="layer1"><inkscape:grid
        type="xygrid"
        id="grid106"
        originx="0"
-       originy="0" />
-  </sodipodi:namedview>
-  <defs
-     id="defs95" />
-  <g
+       originy="0" /></sodipodi:namedview><defs
+     id="defs95" /><g
      inkscape:label="Capa 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(581.40967,-104.91196)">
-    <circle
-       style="fill:#ff7f2a;fill-opacity:1;stroke-width:0.0278348"
+     transform="translate(581.40967,-104.91196)"><circle
+       style="fill:#20b2af;fill-opacity:1;stroke-width:0;stroke:none;stroke-opacity:1;stroke-dasharray:none"
        id="path217"
-       cx="-573.40967"
+       r="8"
        cy="112.91196"
-       r="8" />
-    <circle
-       style="fill:#ffffff;fill-opacity:1;stroke-width:0.0370666"
+       cx="-573.40967"
+       inkscape:label="path217" /><path
+       style="fill:#ff7f2a;fill-opacity:1;stroke:none;stroke-width:0;stroke-opacity:1;stroke-dasharray:none"
+       id="circle3710"
+       sodipodi:type="arc"
+       sodipodi:cx="-573.40967"
+       sodipodi:cy="112.91196"
+       sodipodi:rx="8"
+       sodipodi:ry="8"
+       sodipodi:start="3.1415927"
+       sodipodi:end="4.712389"
+       sodipodi:arc-type="slice"
+       d="m -581.40967,112.91196 a 8,8 0 0 1 8,-8 v 8 z" /><circle
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0;stroke-dasharray:none"
        id="path2353"
        cx="-573.40967"
        cy="112.91196"
        r="6.7096772"
-       inkscape:label="path2353" />
-  </g>
-</svg>
+       inkscape:label="path2353" /><path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       d="m -569.4998,110.00957 c 0.12015,0.13018 0.12015,0.34125 0,0.47142 l -4.9231,5.33332 c -0.12016,0.13019 -0.31496,0.13019 -0.43512,0 l -2.46155,-2.66667 c -0.12016,-0.13014 -0.12016,-0.34125 0,-0.47139 0.12016,-0.13021 0.31498,-0.13021 0.43515,0 l 2.24396,2.43096 4.70551,-5.09764 c 0.12015,-0.13016 0.31495,-0.13016 0.43515,0 z"
+       fill="#030d45"
+       id="path6167"
+       style="display:none;stroke-width:0.5" /></g></svg>
