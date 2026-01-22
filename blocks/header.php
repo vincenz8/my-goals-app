@@ -14,7 +14,7 @@
         <div id="h_logo">My Goals App</div>
         <div id="h_stats">
             <div>Points score today: <span id="dailyScore">0</span></div>
-            <span class="separator"></span>
+            <span class="separator y-ax"></span>
             <?php if ($goalProgress || $goalProgress === "0") { ?>
             <div>Daily goals progress: <?= $goalProgress ?>%</div>
             <?php } else { ?>

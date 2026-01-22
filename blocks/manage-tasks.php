@@ -1,4 +1,7 @@
 <?php include 'header.php'; ?>
+<span class="separator x-ax">
+    <hr>
+</span>
 <form action="." method="post" id="taskForm">
     <div id="addTaskField" style="display: inline">
         <input type="text" id="taskName" placeholder="What to do?">

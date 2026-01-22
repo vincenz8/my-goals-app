@@ -1,9 +1,10 @@
 html {
     font-size: 14px;
     font-family: "Gill Sans", sans-serif;
-    color: #000;
-    margin: auto;
-    width: 640px;
+}   
+
+body {
+    margin: auto 0 auto 0;
 }
 
 header {
@@ -11,6 +12,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 20px auto 20px auto;
+    max-width: 840px;
 }
 
 #h_logo {
@@ -32,16 +35,39 @@ header {
     width: 47.5%;
     padding: 8px;
     border-radius: 4px;
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(0,0,0,.1);
+}
+
+main {
+    min-height: 85vh;
+    max-width: 840px;
+    margin: auto;
 }
 
 .separator {
+    display: block;
+}
+
+hr {
+    color: rgba(0,0,0,.2);
+}
+
+.separator.y-ax {
     order: 2;
     padding: 2%;
 }
 
+.separator.x-ax {
+    height: 30px;
+}
+
 .container {
     display: flex;
+    min-height: 50vh;
+    padding: 5px 30px 5px 30px; 
+    border: 1px solid rgba(27, 173, 165, 1);
+    border-radius: 4px;
+    text-align: center;
 }
 
 .task-list {
@@ -59,6 +85,11 @@ header {
     margin-left: 8px;
 }
 
+footer {
+    background-color: rgba(255,255,255,.2);
+    text-align: center;
+}
+
 @media (max-width: 639px) {
     
     html {
@@ -73,7 +104,7 @@ header {
         width: 35%;
     }
     
-    .separator {
+    .separator.y-ax{
         order: 1;
         padding: 5%;
     }

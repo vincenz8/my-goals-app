@@ -1,6 +1,6 @@
     </main>
     <footer>
-        <span>© 2025</span>
+        <span>© 2026</span>
         <span>Imagined and programmed by Pietro S.</span>
     </footer>
 </body>
