@@ -57,17 +57,43 @@ hr {
     padding: 2%;
 }
 
-.separator.x-ax {
+main > .separator.x-ax {
     height: 30px;
 }
 
-.container {
+#taskMenu {
+    display: inline;
+}
+
+#addTaskField {
+    display: inline;
+}
+
+input.custom, button, select {
+    border: 2px solid rgb(27, 173, 165);
+    border-top-color: #ff7f2a;
+    border-left-color: #ff7f2a;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: white;
+}
+
+input[type=submit], button {
+    font-weight: bold;
+}
+
+button {
+    border-style: dashed;
+}
+
+.task-container {
     display: flex;
     min-height: 50vh;
     padding: 5px 30px 5px 30px; 
     border: 1px solid rgba(27, 173, 165, 1);
     border-radius: 4px;
     text-align: center;
+    margin-top: 10px;
 }
 
 .task-list {

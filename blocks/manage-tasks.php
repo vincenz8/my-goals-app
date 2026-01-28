@@ -3,17 +3,20 @@
     <hr>
 </span>
 <form action="." method="post" id="taskForm">
-    <div id="addTaskField" style="display: inline">
-        <input type="text" id="taskName" placeholder="What to do?">
-        <select id="taskWeight" name="taskWeight">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-        </select>
+    <div id="taskMenu">
+        <input type="submit" class="custom" name="update" value="Update">
+        <div id="addTaskField">
+            <input type="text" id="taskName" class="custom" placeholder="What to do?">
+            <select id="taskWeight" name="taskWeight" class="param">
+                <option value="1">Unimportant</option>
+                <option value="2">Important but non-urgent</option>
+                <option value="3">Urgent but unimportant</option>
+                <option value="4">Urgent and important</option>
+            </select>
+        </div>
         <button type="button" id="buttonAdd">Add Task</button>
     </div>
-    <div class="container">
+    <div class="task-container">
         <div id="taskList" class="task-list">
             <h3>To-do List</h3>
             <script>
@@ -25,6 +28,7 @@
             });
             </script>
         </div>
+        <hr>
         <div id="finishedTasks" class="task-list">
             <h3>Finished Tasks</h3>
             <script>
@@ -37,7 +41,6 @@
             </script>
         </div>
     </div>
-    <input type="submit" name="update" value="Update">
 </form>
 <?php include 'footer.php';
 
