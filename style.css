@@ -89,7 +89,7 @@ button {
 .task-container {
     display: flex;
     min-height: 50vh;
-    padding: 5px 30px 5px 30px; 
+    padding: 5px 0 5px 0; 
     border: 1px solid rgba(27, 173, 165, 1);
     border-radius: 4px;
     text-align: center;
@@ -109,6 +109,26 @@ button {
 
 .list-button {
     margin-left: 8px;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.button-mark-done {
+    height: 20px;
+}
+
+.task-weight-group {
+    display: none;
+}
+
+.button-remove {
+    height: 20px;
 }
 
 footer {
@@ -135,4 +155,3 @@ footer {
         padding: 5%;
     }
 }
-

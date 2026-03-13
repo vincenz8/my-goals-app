@@ -3,6 +3,16 @@ const taskForm = document.getElementById('taskForm');
 const addTaskField = document.getElementById('addTaskField');
 const buttonAdd = document.getElementById('buttonAdd');
 
+const taskGroup1l = document.getElementById('weight-1l');
+const taskGroup2l = document.getElementById('weight-2l');
+const taskGroup3l = document.getElementById('weight-3l');
+const taskGroup4l = document.getElementById('weight-4l');
+
+const taskGroup1r = document.getElementById('weight-1r');
+const taskGroup2r = document.getElementById('weight-2r');
+const taskGroup3r = document.getElementById('weight-3r');
+const taskGroup4r = document.getElementById('weight-4r');
+
 const warning = document.createElement('p');
 warning.innerHTML = "The task cannot be empty!";
 warning.style.color = "red";
@@ -12,6 +22,46 @@ let dailyScore = 0;
 
 let local_index = 0;
 let remote_index = 0;
+
+function showTaskGroup(taskState, taskWeight) {  // Changes display of task groups that have any tasks in it
+    if (taskState === "idle" || taskState === "pending") {
+        switch (taskWeight) {
+            case 1:
+                taskGroup1l.style.display = 'inline';
+                break;
+            case 2:
+                taskGroup2l.style.display = 'inline';
+                break;
+            case 3:
+                taskGroup3l.style.display = 'inline';
+                break;
+            case 4:
+                taskGroup4l.style.display = 'inline';
+                break;
+            default:
+                console.log('Error: Invalid task weight.');
+        }
+    } else if (taskState === "finished") {
+        switch (taskWeight) {
+            case 1:
+                taskGroup1r.style.display = 'inline';
+                break;
+            case 2:
+                taskGroup2r.style.display = 'inline';
+                break;
+            case 3:
+                taskGroup3r.style.display = 'inline';
+                break;
+            case 4:
+                taskGroup4r.style.display = 'inline';
+                break;
+            default:
+                console.log('Error: Invalid task weight.');
+        }
+    } else {
+        console.log('Error: Invalid task state.');
+    }
+}
 
 function reindexLocalTasks() {
   const inputs = document.querySelectorAll('[name^="local_tasks["]');
@@ -75,8 +125,12 @@ const isClicked = {
 };
 
 function createTask(arrayName, index, taskName, taskWeight, taskState) {
+    /* Generic function for creating a task. It is not called
+     * directly and it's used in more specific functions */
+   
     const newTask = document.createElement('span');
-    newTask.innerHTML = taskName;
+    const taskNameP = document.createElement('p');
+    taskNameP.innerHTML = taskName;
 
     const inputTaskName = document.createElement('input');
     inputTaskName.type = "hidden";
@@ -108,11 +162,13 @@ function createTask(arrayName, index, taskName, taskWeight, taskState) {
         markAsDone(circleClicked, newTask, markAsDoneButton, inputTaskState);
         attributePoints(taskWeight);
     }
-    
-    newTask.appendChild(removeButton);
     newTask.appendChild(markAsDoneButton);
+    newTask.appendChild(taskNameP);
+    newTask.appendChild(removeButton);
     
-    return newTask;
+    showTaskGroup(taskState, taskWeight); // Calls function to toggle the display of the HTML 'div' element that will contain the task
+    
+    return newTask; // Returns a pre-built 'span' element containing all the task parts (text content and buttons)
 }
 
 function createLocalTask() {
@@ -128,7 +184,7 @@ function createLocalTask() {
         
     } else {
         
-        const newTask = createTask("local_tasks", local_index, taskName.value, taskWeight.value, "pending");
+        const newTask = createTask("local_tasks", local_index, taskName.value, parseInt(taskWeight.value), "pending");
 
         const input1 = newTask.querySelector(`input[name="local_tasks[${local_index}][task_name]`);
         const input2 = newTask.querySelector(`input[name="local_tasks[${local_index}][task_weight]`);
@@ -138,15 +194,36 @@ function createLocalTask() {
         taskForm.appendChild(input2);
         taskForm.appendChild(input3);
 
+        let taskGroup = "";
+        switch (parseInt(taskWeight.value)) {
+            /* Verifies which HTML secondary group the task 
+             * belongs to, according to its weight */
+            
+            case 1:
+                taskGroup = taskGroup1l;
+                break;
+            case 2:
+                taskGroup = taskGroup2l;
+                break;
+            case 3:
+                taskGroup = taskGroup3l;
+                break;
+            case 4:
+                taskGroup = taskGroup4l;
+                break;
+            default:
+                console.log('Error: Unable to identify corresponding task group.');
+        }
+
         const removeButton = newTask.querySelector('.button-remove');
         removeButton.addEventListener('click', () => {
-            toDoList.removeChild(newTask);
+            taskGroup.removeChild(newTask);
             taskForm.removeChild(input1);
             taskForm.removeChild(input2);
             taskForm.removeChild(input3);
             reindexLocalTasks();
         });
-        toDoList.appendChild(newTask);
+        taskGroup.appendChild(newTask);
         
         local_index++;
         taskName.value = "";
@@ -154,14 +231,50 @@ function createLocalTask() {
 }
 buttonAdd.addEventListener('click', createLocalTask);
 
-function createRemoteTask(taskName, taskWeight, taskState, parentId) {
+function createRemoteTask(taskName, taskWeight, taskState) {
     
-        const newTask = createTask("remote_tasks", remote_index, taskName, taskWeight, taskState);
-        const parentElement = document.getElementById(parentId);
-        
+        const newTask = createTask("remote_tasks", remote_index, taskName, taskWeight, taskState);        
         const input1 = newTask.querySelector(`input[name="remote_tasks[${remote_index}][task_name]`);
         const input2 = newTask.querySelector(`input[name="remote_tasks[${remote_index}][task_weight]`);
         const input3 = newTask.querySelector(`input[name="remote_tasks[${remote_index}][task_state]`);
+        
+        let taskGroup = "";
+        switch (taskWeight) {
+            /* 'if' statements are required since remote tasks can have different states,
+             * depending if they're marked as done or not. Tasks that are marked as done
+             * must be placed in the "Finished Tasks" section */
+            
+            case 1:
+            if (taskState === "idle" || taskState === "pending") {
+                taskGroup = taskGroup1l;
+            } else {
+                taskGroup = taskGroup1r;
+            }
+            break;
+            case 2:
+            if (taskState === "idle" || taskState === "pending") {
+                taskGroup = taskGroup2l;
+            } else {
+                taskGroup = taskGroup2r;
+            }
+            break;
+            case 3:
+            if (taskState === "idle" || taskState === "pending") {
+                taskGroup = taskGroup3l;
+            } else {
+                taskGroup = taskGroup3r;
+            }
+            break;
+            case 4:
+            if (taskState === "idle" || taskState === "pending") {
+                taskGroup = taskGroup4l;
+            } else {
+                taskGroup = taskGroup4r;
+            }
+            break;
+            default:
+                console.log('Error: Unable to identify corresponding task group.');
+        }
         
         taskForm.appendChild(input1);
         taskForm.appendChild(input2);
@@ -169,10 +282,11 @@ function createRemoteTask(taskName, taskWeight, taskState, parentId) {
         
         const removeButton = newTask.querySelector('.button-remove');
         removeButton.addEventListener('click', () => {
-            parentElement.removeChild(newTask);
+            taskGroup.removeChild(newTask);
             input3.value = "removed";
         });
-        parentElement.appendChild(newTask);
+        
+        taskGroup.appendChild(newTask);
         
         remote_index++;
 }
