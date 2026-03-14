@@ -69,6 +69,22 @@ main > .separator.x-ax {
     display: inline;
 }
 
+.hide {
+    visibility: hidden;
+}
+
+#addTaskField:hover {
+    cursor: default;
+}
+
+#taskName:hover {
+    cursor: text;
+}
+
+input[type=submit]:hover, button:hover, select:hover, .button-mark-done:hover, .button-remove:hover, .clickable:hover {
+    cursor: pointer;
+}
+
 input.custom, button, select {
     border: 2px solid rgb(27, 173, 165);
     border-top-color: #ff7f2a;
@@ -102,21 +118,8 @@ button {
     flex-direction: column;
 }
 
-.task-list li {
-    display: flex;
-    margin-bottom: 8px;
-}
-
 .list-button {
     margin-left: 8px;
-}
-
-.task {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 30px;
-    margin-left: 30px;
 }
 
 .button-mark-done {
@@ -125,6 +128,14 @@ button {
 
 .task-weight-group {
     display: none;
+}
+
+.task-weight-group > span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 30px;
+    margin-left: 30px;
 }
 
 .button-remove {

@@ -7,7 +7,7 @@
         <input type="submit" class="custom" name="update" value="Update">
         <div id="addTaskField">
             <input type="text" id="taskName" class="custom" placeholder="What to do?">
-            <select id="taskWeight" name="taskWeight" class="param">
+            <select id="taskWeight" name="taskWeight">
                 <option value="1">Unimportant</option>
                 <option value="2">Important but non-urgent</option>
                 <option value="3">Urgent but unimportant</option>
@@ -19,17 +19,17 @@
     <div class="task-container">
         <div id="taskList" class="task-list">
             <h3>To-do List</h3>
-            <div id="weight-1l" class="task-weight-group">
-                <h4>Unimportant</h4>
-            </div>
-            <div id="weight-2l" class="task-weight-group">
-                <h4>Important but non-urgent</h4>
+            <div id="weight-4l" class="task-weight-group">
+                <h4 class="clickable" onclick="toggleHideTasks('weight-4l')">Urgent and important</h4>
             </div>
             <div id="weight-3l" class="task-weight-group">
-                <h4>Urgent but unimportant</h4>
+                <h4 class="clickable" onclick="toggleHideTasks('weight-3l')">Urgent but unimportant</h4>
             </div>
-            <div id="weight-4l" class="task-weight-group">
-                <h4>Urgent and important</h4>
+            <div id="weight-2l" class="task-weight-group">
+                <h4 class="clickable" onclick="toggleHideTasks('weight-2l')">Important but non-urgent</h4>
+            </div>
+            <div id="weight-1l" class="task-weight-group">
+                <h4 class="clickable" onclick="toggleHideTasks('weight-1l')">Unimportant</h4>
             </div>
             <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -43,17 +43,17 @@
         <hr>
         <div id="finishedTasks" class="task-list">
             <h3>Finished Tasks</h3>
-            <div id="weight-1r" class="task-weight-group">
-                <h4>Unimportant</h4>
-            </div>
-            <div id="weight-2r" class="task-weight-group">
-                <h4>Important but non-urgent</h4>
+            <div id="weight-4r" class="task-weight-group">
+                <h4 class="clickable" onclick="toggleHideTasks('weight-4r')">Urgent and important</h4>
             </div>
             <div id="weight-3r" class="task-weight-group">
-                <h4>Urgent but unimportant</h4>
+                <h4 class="clickable" onclick="toggleHideTasks('weight-3r')">Urgent but unimportant</h4>
             </div>
-            <div id="weight-4r" class="task-weight-group">
-                <h4>Urgent and important</h4>
+            <div id="weight-2r" class="task-weight-group">
+                <h4 class="clickable" onclick="toggleHideTasks('weight-2r')">Important but non-urgent</h4>
+            </div>
+            <div id="weight-1r" class="task-weight-group">
+                <h4 class="clickable" onclick="toggleHideTasks('weight-1r')">Unimportant</h4>
             </div>
             <script>
             document.addEventListener("DOMContentLoaded", function () {

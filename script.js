@@ -13,15 +13,22 @@ const taskGroup2r = document.getElementById('weight-2r');
 const taskGroup3r = document.getElementById('weight-3r');
 const taskGroup4r = document.getElementById('weight-4r');
 
-const warning = document.createElement('p');
-warning.innerHTML = "The task cannot be empty!";
-warning.style.color = "red";
-
 const spanDailyScore = document.getElementById('dailyScore');
 let dailyScore = 0;
 
 let local_index = 0;
 let remote_index = 0;
+
+function showWarning() {
+  alert('Task cannot be empty!');
+}
+
+function toggleHideTasks(groupId) {
+    const taskGroup = document.getElementById(groupId);
+    for (const task of taskGroup.getElementsByTagName("span")) {
+        task.classList.toggle("hide");
+    }
+}
 
 function showTaskGroup(taskState, taskWeight) {  // Changes display of task groups that have any tasks in it
     if (taskState === "idle" || taskState === "pending") {
@@ -176,11 +183,8 @@ function createLocalTask() {
     taskName.value = String(taskName.value).trim();
     const taskWeight = document.getElementById('taskWeight');
     
-    if (taskForm.contains(warning)) {
-        taskForm.removeChild(warning); }
-    
     if (taskName.value === "") {
-        taskForm.insertBefore(warning, addTaskField);
+        showWarning();
         
     } else {
         
