@@ -81,11 +81,11 @@ main > .separator.x-ax {
     cursor: text;
 }
 
-input[type=submit]:hover, button:hover, select:hover, .button-mark-done:hover, .button-remove:hover, .clickable:hover {
+.cursor-pointer:hover, .button-remove:hover, .button-mark-done:hover {
     cursor: pointer;
 }
 
-input.custom, button, select {
+input[type=submit], input[type=text], button, select {
     border: 2px solid rgb(27, 173, 165);
     border-top-color: #ff7f2a;
     border-left-color: #ff7f2a;
