@@ -1,7 +1,5 @@
 <?php include 'header.php'; ?>
-<span class="separator x-ax">
-    <hr>
-</span>
+<span class="separator x-ax"><hr></span>
 <form action="." method="post" id="taskForm">
     <div id="taskMenu">
         <input type="submit" class="cursor-pointer" name="update" value="Update">
@@ -18,18 +16,18 @@
     </div>
     <div class="task-container">
         <div id="taskList" class="task-list">
-            <h3>To-do List</h3>
+            <h1>To-do List</h1>
             <div id="weight-4l" class="task-weight-group">
-                <h4 class="cursor-pointer" onclick="toggleHideTasks('weight-4l')">Urgent and important</h4>
+                <h2 class="cursor-default" onclick="toggleHideTasks('weight-4l')">Urgent and important</h2>
             </div>
             <div id="weight-3l" class="task-weight-group">
-                <h4 class="cursor-pointer" onclick="toggleHideTasks('weight-3l')">Urgent but unimportant</h4>
+                <h2 class="cursor-default" onclick="toggleHideTasks('weight-3l')">Urgent but unimportant</h2>
             </div>
             <div id="weight-2l" class="task-weight-group">
-                <h4 class="cursor-pointer" onclick="toggleHideTasks('weight-2l')">Important but non-urgent</h4>
+                <h2 class="cursor-default" onclick="toggleHideTasks('weight-2l')">Important but non-urgent</h2>
             </div>
             <div id="weight-1l" class="task-weight-group">
-                <h4 class="cursor-pointer" onclick="toggleHideTasks('weight-1l')">Unimportant</h4>
+                <h2 class="cursor-default" onclick="toggleHideTasks('weight-1l')">Unimportant</h2>
             </div>
             <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -42,18 +40,18 @@
         </div>
         <hr>
         <div id="finishedTasks" class="task-list">
-            <h3>Finished Tasks</h3>
+            <h1>Finished Tasks</h1>
             <div id="weight-4r" class="task-weight-group">
-                <h4 class="cursor-pointer" onclick="toggleHideTasks('weight-4r')">Urgent and important</h4>
+                <h2 class="cursor-default" onclick="toggleHideTasks('weight-4r')">Urgent and important</h2>
             </div>
             <div id="weight-3r" class="task-weight-group">
-                <h4 class="cursor-pointer" onclick="toggleHideTasks('weight-3r')">Urgent but unimportant</h4>
+                <h2 class="cursor-default" onclick="toggleHideTasks('weight-3r')">Urgent but unimportant</h2>
             </div>
             <div id="weight-2r" class="task-weight-group">
-                <h4 class="cursor-pointer" onclick="toggleHideTasks('weight-2r')">Important but non-urgent</h4>
+                <h2 class="cursor-default" onclick="toggleHideTasks('weight-2r')">Important but non-urgent</h2>
             </div>
             <div id="weight-1r" class="task-weight-group">
-                <h4 class="cursor-pointer" onclick="toggleHideTasks('weight-1r')">Unimportant</h4>
+                <h2 class="cursor-default" onclick="toggleHideTasks('weight-1r')">Unimportant</h2>
             </div>
             <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -65,6 +63,23 @@
             </script>
         </div>
     </div>
+    <div class="instructions">
+        <h1>How to create a task?</h1>
+        <span>
+            Type the description of the task you'd like to create in the "What to do?" field.
+            <br><br>
+            Select one of four relevancy categories for the task:<br>
+            <ul>
+                <li>Unimportant (lowest), worth 1 point;</li><br>
+                <li>Important but non-urgent, worth 4 points;</li><br>
+                <li>Urgent but unimportant, worth 20 points;</li><br>
+                <li>Urgent and important (highest), worth 100 points.</li>
+            </ul><br>
+            <b>IMPORTANT:</b> First press 'Add Task' to create the task locally, then press 'Update' to upload it to the database.<br>
+            If you only press 'Add Task' and reload the page, the task will disappear.<br>
+        </span>
+    </div>
+    <span class="separator x-ax"><hr></span>
 </form>
 <?php include 'footer.php';
 

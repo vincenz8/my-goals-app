@@ -4,7 +4,24 @@ html {
 }   
 
 body {
-    margin: auto 0 auto 0;
+    margin: auto 5% auto 5%;
+}
+
+h1 {
+    font-size: 18px;
+}
+
+.instructions > h1 {
+    font-size: 16px;
+    margin: 0 0 15px 0;
+}
+
+h2 {
+    font-size: 14px;
+}
+
+ul {
+    margin-bottom: 0;
 }
 
 header {
@@ -85,6 +102,10 @@ main > .separator.x-ax {
     cursor: pointer;
 }
 
+.cursor-default:hover {
+    cursor: default;
+}
+
 input[type=submit], input[type=text], button, select {
     border: 2px solid rgb(27, 173, 165);
     border-top-color: #ff7f2a;
@@ -142,9 +163,14 @@ button {
     height: 20px;
 }
 
+.instructions {
+    margin: 30px auto 30px auto;
+    color: rgba(0, 0, 0, 0.5);
+}
+
 footer {
-    background-color: rgba(255,255,255,.2);
     text-align: center;
+    padding: 20px 0 20px 0;
 }
 
 @media (max-width: 639px) {
@@ -153,8 +179,16 @@ footer {
         width: auto;
     }
     
-    #h_logo {
-        
+    h1 {
+        font-size: 14px;
+    }
+    
+    h2 {
+        font-size: 12px;
+    }
+    
+    p {
+        font-size: 12px;
     }
     
     #h_stats > div {
