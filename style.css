@@ -78,7 +78,7 @@ main > .separator.x-ax {
     height: 30px;
 }
 
-#taskMenu {
+.input-params {
     display: inline;
 }
 
@@ -153,6 +153,7 @@ button {
 
 .task-weight-group > span {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     margin-right: 30px;
@@ -180,14 +181,47 @@ footer {
     }
     
     h1 {
+        font-size: 14px !important;
+    }
+    
+    h2, p, li {
         font-size: 14px;
+    } 
+    
+    .input-params {
+        display: flex;
+        flex-wrap: wrap;
     }
     
-    h2 {
-        font-size: 12px;
+    #addTaskField {
+        order: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #addTaskField > input {
+        width: 100%;              
+        box-sizing: border-box; 
     }
     
-    p {
+    #taskWeight {
+        margin: 5px 0 5px 0;
+    }
+    
+    .input-params > input {
+        order: 2;
+        flex-basis: 49.5%;
+        margin-left: 0.5%;
+    }
+    
+    .input-params > button {
+        order: 1;
+        flex-basis: 49.5%;
+        margin-right: 0.5%;
+    }
+    
+    .task-weight-group > span {
         font-size: 12px;
     }
     

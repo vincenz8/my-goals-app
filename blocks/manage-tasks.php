@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
 <span class="separator x-ax"><hr></span>
 <form action="." method="post" id="taskForm">
-    <div id="taskMenu">
+    <div id="taskMenu" class="input-params">
         <input type="submit" class="cursor-pointer" name="update" value="Update">
         <div id="addTaskField">
             <input type="text" id="taskName" placeholder="What to do?">
@@ -66,17 +66,16 @@
     <div class="instructions">
         <h1>How to create a task?</h1>
         <span>
-            Type the description of the task you'd like to create in the "What to do?" field.
-            <br><br>
-            Select one of four relevancy categories for the task:<br>
+            <p><b>1. </b>Type the description of the task you'd like to create in the "What to do?" field.</p>
+            <p><b>2. </b>Select one of four relevancy categories for the task:</p>
             <ul>
                 <li>Unimportant (lowest), worth 1 point;</li><br>
                 <li>Important but non-urgent, worth 4 points;</li><br>
                 <li>Urgent but unimportant, worth 20 points;</li><br>
                 <li>Urgent and important (highest), worth 100 points.</li>
-            </ul><br>
-            <b>IMPORTANT:</b> First press 'Add Task' to create the task locally, then press 'Update' to upload it to the database.<br>
-            If you only press 'Add Task' and reload the page, the task will disappear.<br>
+            </ul>
+            <p><b>3. </b>Press 'Add Task' to create the task locally, then press 'Update' to upload it to the database.</p>
+            <p><b>IMPORTANT! </b>If you only press 'Add Task' and reload the page, the task will disappear.</p><br>
         </span>
     </div>
     <span class="separator x-ax"><hr></span>
