@@ -1,9 +1,20 @@
 <?php
 
-function fetch_tasks() {
+function fetch_daily_tasks() {
     global $db;
     $fetchedTasks = [];
     $query = $db->query('SELECT * FROM day_tasks');
+    while ($row = $query->fetchArray()) {
+        $row['task_state'] === "pending" ? $row['task_state'] = "idle" : false;
+        $fetchedTasks[] = $row;
+    }
+    return $fetchedTasks;
+}
+
+function fetch_task_history() {
+    global $db;
+    $fetchedTasks = [];
+    $query = $db->query('SELECT * FROM task_history');
     while ($row = $query->fetchArray()) {
         $row['task_state'] === "pending" ? $row['task_state'] = "idle" : false;
         $fetchedTasks[] = $row;

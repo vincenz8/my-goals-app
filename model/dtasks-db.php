@@ -53,6 +53,7 @@ function sanitize_tasks($indexedInputs) {
 
 function insert_task($task) {      
     global $db;
+    global $err;
     $stmt = $db->prepare('INSERT INTO day_tasks (task_name, task_weight, task_date, task_state) VALUES (:c1, :c2, :c3, :c4)');
     $stmt->bindValue(':c1', $task['task_name'], SQLITE3_TEXT);
     $stmt->bindValue(':c2', $task['task_weight'], SQLITE3_INTEGER);
@@ -67,13 +68,14 @@ function insert_task($task) {
     $result = $stmt->execute();
     
     if ($result) {
-        echo "Database insertion successful.";
+        $err = "Database insertion successful.";
     } else {
-        echo "Database insertion failed: " . $db->lastErrorMsg();
+        $err = "Database insertion failed: " . $db->lastErrorMsg();
     }
 }
 function modify_task($task) {    
     global $db;
+    global $err;
     if ($task['task_state'] !== "idle") {
         
         if ($task['task_state'] === "removed") {
@@ -90,9 +92,9 @@ function modify_task($task) {
         $result = $stmt->execute();
         
         if ($result) {
-            echo "Database operation successful.";
+            $err = "Database operation successful.";
         } else {
-            echo "Database operation failed: " . $db->lastErrorMsg();
+            $err = "Database operation failed: " . $db->lastErrorMsg();
         }
     }
 }

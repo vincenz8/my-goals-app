@@ -1,8 +1,7 @@
 <?php include 'header.php'; ?>
-<span class="separator x-ax"><hr></span>
 <form action="." method="post" id="taskForm">
     <div id="taskMenu" class="input-params">
-        <input type="submit" class="cursor-pointer" name="update" value="Update">
+        <input type="submit" class="button cursor-pointer" name="update" value="Update">
         <div id="addTaskField">
             <input type="text" id="taskName" placeholder="What to do?">
             <select id="taskWeight" name="taskWeight">
@@ -12,7 +11,7 @@
                 <option value="4">Urgent and important</option>
             </select>
         </div>
-        <button type="button" id="buttonAdd" class="cursor-pointer">Add Task</button>
+        <button type="button" id="buttonAdd" class="button cursor-pointer">Add Task</button>
     </div>
     <div class="task-container">
         <div id="taskList" class="task-list">
@@ -31,7 +30,7 @@
             </div>
             <script>
             document.addEventListener("DOMContentLoaded", function () {
-            <?php foreach ($fetchedTasks as $task): 
+            <?php foreach ($fetchedDailyTasks as $task): 
                 if ($task['task_state'] === "idle") { ?>
                     createRemoteTask("<?= $task['task_name']; ?>", <?= $task['task_weight']; ?>, "<?= $task['task_state']; ?>");
             <?php } endforeach; ?>
@@ -55,7 +54,7 @@
             </div>
             <script>
             document.addEventListener("DOMContentLoaded", function () {
-            <?php foreach ($fetchedTasks as $task): 
+            <?php foreach ($fetchedDailyTasks as $task): 
                 if ($task['task_state'] === "finished") { ?>
                     createRemoteTask("<?= $task['task_name']; ?>", <?= $task['task_weight']; ?>, "<?= $task['task_state']; ?>");
             <?php } endforeach; ?>
