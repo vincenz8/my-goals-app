@@ -4,15 +4,19 @@ html {
 }   
 
 body {
-    margin: auto 5% auto 5%;
+    max-width: 840px;
+    margin: auto;
 }
 
 h1 {
     font-size: 18px;
 }
 
+.instructions > * {
+    font-size: 14px;
+}
+
 .instructions > h1 {
-    font-size: 16px;
     margin: 0 0 15px 0;
 }
 
@@ -24,34 +28,65 @@ ul {
     margin-bottom: 0;
 }
 
-header {
-    text-align: center;
+header > form {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin: 20px auto 20px auto;
-    max-width: 840px;
+}
+
+header > form > span {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+header > form > * {
+    flex-grow: 1;
+    align-content: end;
+}
+
+form > .column {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.column > * {
+    text-wrap: wrap;
+}
+
+.column > input {
+    margin: 0 10px 0 0;
+    padding: 6px !important;
+    line-height: 18px;
+    border-color: rgba(27, 173, 165, .2) !important;
+}
+
+.right-align {
+    justify-content: end !important;
+}
+
+.right-align > * {
+    margin-left: 10px;
 }
 
 #h_logo {
-    flex-grow: 1;
+    max-width: 200px;
     font-size: 1.3rem;
     font-weight: bold;
     color: lightseagreen;
     text-align: start;
 }
 
-#h_stats {
-    flex-grow: 1;
-    display: flex;
-    justify-content: space-between;
+.box {
+    padding: 8px !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    border-radius: 4px;
 }
 
-#h_stats > div {
-    order: 2;
-    width: 47.5%;
-    padding: 8px;
-    border-radius: 4px;
+.score-display {
+    line-height: 18px;
     background-color: rgba(0,0,0,.1);
 }
 
@@ -70,11 +105,13 @@ hr {
 }
 
 .separator.y-ax {
-    order: 2;
-    padding: 2%;
+    width: 2px;
+    height: 20px;
+    border-radius: 8px;
+    background-color: lightseagreen;
 }
 
-main > .separator.x-ax {
+header > .separator.x-ax {
     height: 30px;
 }
 
@@ -106,7 +143,7 @@ main > .separator.x-ax {
     cursor: default;
 }
 
-input[type=submit], input[type=text], button, select {
+input[type=submit], input[type=text], .button, select {
     border: 2px solid rgb(27, 173, 165);
     border-top-color: #ff7f2a;
     border-left-color: #ff7f2a;
@@ -115,11 +152,11 @@ input[type=submit], input[type=text], button, select {
     background-color: white;
 }
 
-input[type=submit], button {
+input[type=submit], .button {
     font-weight: bold;
 }
 
-button {
+#buttonAdd {
     border-style: dashed;
 }
 
@@ -154,6 +191,7 @@ button {
 .task-weight-group > span {
     display: flex;
     flex-wrap: wrap;
+    text-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     margin-right: 30px;
@@ -186,7 +224,11 @@ footer {
     
     h2, p, li {
         font-size: 14px;
-    } 
+    }
+    
+    .separator.y-ax {
+        height: 30px !important;
+    }
     
     .input-params {
         display: flex;
@@ -227,10 +269,5 @@ footer {
     
     #h_stats > div {
         width: 35%;
-    }
-    
-    .separator.y-ax{
-        order: 1;
-        padding: 5%;
     }
 }

@@ -19,6 +19,8 @@ let dailyScore = 0;
 let local_index = 0;
 let remote_index = 0;
 
+let task_box_width = 319;
+
 function showWarning() {
   alert('Task cannot be empty!');
 }
@@ -131,28 +133,49 @@ const isClicked = {
     }
 };
 
-function createTask(arrayName, index, taskName, taskWeight, taskState) {
-    /* Generic function for creating a task. It is not called
-     * directly and it's used in more specific functions */
-   
+function createTask(arrayName, index, content, weight, state) {
+    /* Abstract function for creating a task. It is not called
+     * directly and is implemented by other functions */
     const newTask = document.createElement('span');
-    const taskNameP = document.createElement('p');
-    taskNameP.innerHTML = taskName;
+    const taskContent = document.createElement('p');
+    const contentRawArr = Array.from(content);
+    const nCharacters = contentRawArr.length;
+    let contentArray = [];
+    let finalArray = [];
+    /* calculate n of lines based on division of total chars by 22, excluding
+     * decimals, which represent an incomplete line (<22 chars) */
+    let nLines = Math.trunc(nCharacters / 22) ? Math.trunc(nCharacters / 22) : 1;
+    
+    for (i = 0; i < nLines; i++) {
+        contentArray.push(contentRawArr.splice(0, 22), '<br>');
+    }
+    // console.log for debugging only
+    console.log('array length: ' + contentRawArr.length);
+    console.log('remaining chars of this array: ' + contentRawArr + '\n\n\
+');
+    if (contentRawArr.length) { // prevent it from pushing an empty array
+        contentArray.push(contentRawArr); // push incomplete line into the array
+    }
+    for (i = 0; i < contentArray.length; i++) { // fuse all sub-arrays/lines into one
+        finalArray = finalArray.concat(contentArray[i]);
+    }
+    // remove separators between chars
+    taskContent.innerHTML = finalArray.join("");
 
     const inputTaskName = document.createElement('input');
     inputTaskName.type = "hidden";
     inputTaskName.name = `${arrayName}[${index}][task_name]`;
-    inputTaskName.value = taskName;
+    inputTaskName.value = content;
 
     const inputTaskWeight = document.createElement('input');
     inputTaskWeight.type = "hidden";
     inputTaskWeight.name = `${arrayName}[${index}][task_weight]`;
-    inputTaskWeight.value = taskWeight;
+    inputTaskWeight.value = weight;
 
     const inputTaskState = document.createElement('input');
     inputTaskState.type = "hidden";
     inputTaskState.name = `${arrayName}[${index}][task_state]`;
-    inputTaskState.value = taskState;
+    inputTaskState.value = state;
 
     const removeButton = createButtonRemove();
     const markAsDoneButton = createButtonMarkAsDone();
@@ -165,15 +188,15 @@ function createTask(arrayName, index, taskName, taskWeight, taskState) {
     markAsDoneButton.addEventListener('click', () => {
         markAsDone(circleClicked, newTask, markAsDoneButton, inputTaskState);
     });
-    if (taskState === "finished") {
+    if (state === "finished") {
         markAsDone(circleClicked, newTask, markAsDoneButton, inputTaskState);
-        attributePoints(taskWeight);
+        attributePoints(weight);
     }
     newTask.appendChild(markAsDoneButton);
-    newTask.appendChild(taskNameP);
+    newTask.appendChild(taskContent);
     newTask.appendChild(removeButton);
     
-    showTaskGroup(taskState, taskWeight); // Calls function to toggle the display of the HTML 'div' element that will contain the task
+    showTaskGroup(state, weight); // Calls function to toggle the display of the HTML 'div' element that will contain the task
     
     return newTask; // Returns a pre-built 'span' element containing all the task parts (text content and buttons)
 }
