@@ -1,5 +1,6 @@
 const toDoList = document.getElementById('taskList');
 const taskForm = document.getElementById('taskForm');
+const taskMenu = document.getElementById('taskMenu');
 const addTaskField = document.getElementById('addTaskField');
 const buttonAdd = document.getElementById('buttonAdd');
 
@@ -140,14 +141,18 @@ function createTask(arrayName, index, content, weight, state) {
     const taskContent = document.createElement('p');
     const contentRawArr = Array.from(content);
     const nCharacters = contentRawArr.length;
+    let lineLen = 40;
+    if (taskMenu.offsetWidth < 514) {
+        lineLen = 15;
+    }
     let contentArray = [];
     let finalArray = [];
     /* calculate n of lines based on division of total chars by 22, excluding
      * decimals, which represent an incomplete line (<22 chars) */
-    let nLines = Math.trunc(nCharacters / 22) ? Math.trunc(nCharacters / 22) : 1;
+    let nLines = Math.trunc(nCharacters / lineLen) ? Math.trunc(nCharacters / lineLen) : 1;
     
     for (i = 0; i < nLines; i++) {
-        contentArray.push(contentRawArr.splice(0, 22), '<br>');
+        contentArray.push(contentRawArr.splice(0, lineLen), '<br>');
     }
     // console.log for debugging only
     console.log('array length: ' + contentRawArr.length);

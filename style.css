@@ -212,10 +212,11 @@ footer {
     padding: 20px 0 20px 0;
 }
 
-@media (max-width: 639px) {
+@media (max-width: 515px) {
     
     html {
         width: auto;
+        margin: auto 15px auto 15px ;
     }
     
     h1 {
