@@ -25,33 +25,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update'])) {
     exit();
 }
 
-$fetchedDailyTasks = fetch_daily_tasks();
+$dailyTasks = fetch_daily_tasks();
 
-if ($fetchedDailyTasks) {
+if ($dailyTasks) {
     $taskFinished = 0;
-    foreach ($fetchedDailyTasks as $task) {
+    foreach ($dailyTasks as $task) {
         if ($task['task_state'] == "finished") {
             $taskFinished++;
         }
     }
     if ($taskFinished) {
-        $goalProgress = round(($taskFinished / count($fetchedDailyTasks)) * 100);
+        $goalProgress = round(($taskFinished / count($dailyTasks)) * 100);
     } else {
         $goalProgress = "0";
     }
     
-    if (date("Y-m-d", strtotime($fetchedDailyTasks[0]['task_date'])) !== date("Y-m-d")) {
+    if (date("Y-m-d", strtotime($dailyTasks[0]['task_date'])) !== date("Y-m-d")) {
         $accumulatedPoints = 0;
-        foreach ($fetchedDailyTasks as $task) {
+        foreach ($dailyTasks as $task) {
             if ($task['task_state'] === "finished") {
                 $accumulatedPoints += calculate_points_ftasks($task);
             } else {
                 $accumulatedPoints += calculate_points_ptasks($task);
             }
         }
-        insert_points($accumulatedPoints, $fetchedDailyTasks[0]['task_date']);
+        insert_points($accumulatedPoints, $dailyTasks[0]['task_date']);
         move_finished_tasks();
-        $fetchedDailyTasks = [];
+        $dailyTasks = [];
     }
 }
 

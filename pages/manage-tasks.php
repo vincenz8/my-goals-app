@@ -30,7 +30,7 @@
             </div>
             <script>
             document.addEventListener("DOMContentLoaded", function () {
-            <?php foreach ($fetchedDailyTasks as $task): 
+            <?php foreach ($dailyTasks as $task): 
                 if ($task['task_state'] === "idle") { ?>
                     createRemoteTask("<?= $task['task_name']; ?>", <?= $task['task_weight']; ?>, "<?= $task['task_state']; ?>");
             <?php } endforeach; ?>
@@ -54,7 +54,7 @@
             </div>
             <script>
             document.addEventListener("DOMContentLoaded", function () {
-            <?php foreach ($fetchedDailyTasks as $task): 
+            <?php foreach ($dailyTasks as $task): 
                 if ($task['task_state'] === "finished") { ?>
                     createRemoteTask("<?= $task['task_name']; ?>", <?= $task['task_weight']; ?>, "<?= $task['task_state']; ?>");
             <?php } endforeach; ?>
